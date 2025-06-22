@@ -1,16 +1,11 @@
-#!/usr/bin/env bun
-
 import { Command } from "@effect/cli";
-import { NodeContext, NodeRuntime } from "@effect/platform-node";
+import { BunContext, BunRuntime } from "@effect/platform-bun";
 import { Effect } from "effect";
 import { askCommand } from "./commands/ask.js";
 
 const cli = Command.run(askCommand, {
-  name: "Ask CLI",
-  version: "0.1.0",
+	name: "Ask CLI",
+	version: "0.1.0",
 });
 
-cli(process.argv).pipe(
-  Effect.provide(NodeContext.layer),
-  NodeRuntime.runMain
-);
+cli(process.argv).pipe(Effect.provide(BunContext.layer), BunRuntime.runMain);
