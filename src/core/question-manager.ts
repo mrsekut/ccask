@@ -1,9 +1,10 @@
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { existsSync } from "fs";
+import { homedir } from "os";
 import type { Question, QuestionsDB, QuestionStatus } from "../types/index.js";
 
-const DATA_DIR = "data";
+const DATA_DIR = join(homedir(), ".aiq");
 const QUESTIONS_FILE = join(DATA_DIR, "questions.json");
 
 const ensureDataDir = async (): Promise<void> => {

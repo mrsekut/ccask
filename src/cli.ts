@@ -1,15 +1,22 @@
 import { Command } from "@effect/cli";
 import { BunContext, BunRuntime } from "@effect/platform-bun";
 import { Console, Effect } from "effect";
-import { addCommand, listCommand, showCommand, copyCommand } from "./commands/index.js";
+import {
+	addCommand,
+	listCommand,
+	showCommand,
+	copyCommand,
+} from "./commands/index.js";
 
-const main = Command.make("ask", {}, () =>
-	Console.log(`Ask CLI - 技術用語の解説を生成します`)
-).pipe(Command.withSubcommands([addCommand, listCommand, showCommand, copyCommand]));
+const main = Command.make("aiq", {}, () => Console.log(`aiq`)).pipe(
+	Command.withSubcommands([addCommand, listCommand, showCommand, copyCommand])
+);
 
 const cli = Command.run(main, {
-	name: "Ask CLI",
-	version: "0.1.0",
+	name: "aiq",
+	version: "1.0.0",
 });
 
-cli(process.argv).pipe(Effect.provide(BunContext.layer), BunRuntime.runMain);
+export const mainCli = (argv: string[]) => {
+	cli(argv).pipe(Effect.provide(BunContext.layer), BunRuntime.runMain);
+};

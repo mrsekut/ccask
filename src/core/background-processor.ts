@@ -1,9 +1,10 @@
 import { spawn } from "child_process";
 import { join } from "path";
+import { homedir } from "os";
 import type { WorkerArgs } from "../types/index.js";
 import { addQuestion, sanitizeFilename } from "./question-manager.js";
 
-const ANSWERS_DIR = "answers";
+const ANSWERS_DIR = join(homedir(), ".aiq", "answers");
 const WORKER_PATH = "./src/workers/generation-worker.ts";
 
 export const startBackgroundGeneration = async (
@@ -14,8 +15,8 @@ export const startBackgroundGeneration = async (
 	const filename = sanitizeFilename(questionTerm) + ".md";
 	const filepath = join(ANSWERS_DIR, filename);
 
-	console.log(`✓ "${questionTerm}" の解説をバックグラウンドで生成開始`);
-	console.log(`  → ${filepath} に保存されます`);
+	console.log(`✓ Started generating explanation for "${questionTerm}" in background`);
+	console.log(`  → Will be saved to ${filepath}`);
 
 	const workerArgs: WorkerArgs = {
 		question: questionTerm,

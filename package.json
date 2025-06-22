@@ -1,8 +1,11 @@
 {
-	"name": "ask",
+	"name": "aiq",
+	"version": "1.0.0",
+	"description": "AI Question",
+	"main": "dist/index.js",
+	"bin": "dist/index.js",
 	"module": "index.ts",
 	"type": "module",
-	"private": true,
 	"scripts": {
 		"dev": "bun run index.ts",
 		"build": "bun build index.ts --outdir dist",
