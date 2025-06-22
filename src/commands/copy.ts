@@ -9,7 +9,7 @@ import {
 } from "../core/question-manager.js";
 
 const questionArg = Args.text({ name: "question" }).pipe(
-	Args.withDescription("質問のID、用語、またはパス")
+	Args.withDescription("Question ID, term, or path")
 );
 
 const copyToClipboard = (text: string): Promise<void> => {
@@ -42,13 +42,13 @@ const copyImplementation = (question: string) =>
 		const targetQuestion = questionById || questionByTerm;
 
 		if (!targetQuestion) {
-			yield* Console.error(`質問が見つかりません: ${question}`);
+			yield* Console.error(`Question not found: ${question}`);
 			return yield* Effect.fail(new Error("Question not found"));
 		}
 
 		if (targetQuestion.status !== "completed" || !targetQuestion.filepath) {
 			yield* Console.error(
-				`まだ解説が生成されていません: ${targetQuestion.term}`
+				`Explanation not ready yet: ${targetQuestion.term}`
 			);
 			return yield* Effect.fail(new Error("Explanation not ready"));
 		}
@@ -56,7 +56,7 @@ const copyImplementation = (question: string) =>
 		// ファイルの内容を読み取り
 		if (!existsSync(targetQuestion.filepath)) {
 			yield* Console.error(
-				`ファイルが見つかりません: ${targetQuestion.filepath}`
+				`File not found: ${targetQuestion.filepath}`
 			);
 			return yield* Effect.fail(new Error("File not found"));
 		}
@@ -69,7 +69,7 @@ const copyImplementation = (question: string) =>
 		yield* Effect.promise(() => copyToClipboard(content));
 
 		yield* Console.log(
-			`✓ "${targetQuestion.term}" の解説をクリップボードにコピーしました`
+			`✓ Copied explanation for "${targetQuestion.term}" to clipboard`
 		);
 	});
 
@@ -77,4 +77,4 @@ export const copyCommand = Command.make(
 	"copy",
 	{ question: questionArg },
 	({ question }) => copyImplementation(question)
-).pipe(Command.withDescription("生成された解説をクリップボードにコピーします"));
+).pipe(Command.withDescription("Copy generated explanation to clipboard"));

@@ -69,8 +69,8 @@ export const listCommand = Command.make(
 				recent: boolean,
 				status: string
 			): string[] => [
-				...(pending ? ["待機中のみ"] : []),
-				...(recent ? ["24時間以内"] : []),
+				...(pending ? ["Pending only"] : []),
+				...(recent ? ["Last 24 hours"] : []),
 				...(status !== "all" ? [formatStatus(status as QuestionStatus)] : []),
 			];
 
@@ -80,23 +80,23 @@ export const listCommand = Command.make(
 			);
 
 			if (filteredQuestions.length === 0) {
-				return yield* Console.log("\n質問が見つかりません。");
+				return yield* Console.log("\nNo questions found.");
 			}
 
 			const stats = calculateStats(questions);
 			const filters = buildFilters(pending, recent, status);
 
 			yield* Console.log(
-				`\n📋 Ask CLI 質問一覧 (${new Date().toLocaleString("ja-JP")})\n`
+				`\n📋 aiq - Question List (${new Date().toLocaleString()})\n`
 			);
-			yield* Console.log("📈 統計:");
+			yield* Console.log("📈 Statistics:");
 			yield* Console.log(
-				`  待機中: ${stats.pending} | 生成中: ${stats.generating} | 完了: ${stats.completed} | 失敗: ${stats.failed}`
+				`  Pending: ${stats.pending} | Generating: ${stats.generating} | Completed: ${stats.completed} | Failed: ${stats.failed}`
 			);
 			yield* Console.log("");
 
 			if (filters.length > 0) {
-				yield* Console.log(`🔍 フィルター: ${filters.join(", ")}\n`);
+				yield* Console.log(`🔍 Filters: ${filters.join(", ")}\n`);
 			}
 
 			for (const [index, question] of filteredQuestions.entries()) {
