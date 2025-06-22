@@ -21,31 +21,45 @@ export const formatStatus = (status: Question["status"]): string => {
 	return statusMap[status] || status;
 };
 
+const formatDate = (date: string): string =>
+	new Date(date).toLocaleString("ja-JP");
+
+const formatStartedInfo = (startedAt: string | undefined): string =>
+	startedAt ? `  開始: ${formatDate(startedAt)}\n` : "";
+
+const formatCompletedInfo = (
+	completedAt: string | undefined,
+	startedAt: string | undefined
+): string =>
+	completedAt && startedAt
+		? `  完了: ${formatDate(completedAt)} (${formatDuration(
+				startedAt,
+				completedAt
+		  )})\n`
+		: "";
+
+const formatFilepath = (filepath: string | undefined): string =>
+	filepath ? `  ファイル: ${filepath}\n` : "";
+
+const formatError = (error: string | undefined): string =>
+	error ? `  エラー: ${error}\n` : "";
+
 export const formatQuestion = (question: Question): string => {
-	let output = `[${question.id}] ${question.term}\n`;
-	output += `  状態: ${formatStatus(question.status)}\n`;
-	output += `  作成: ${new Date(question.createdAt).toLocaleString("ja-JP")}\n`;
+	const baseInfo = [
+		`[${question.id}] ${question.term}`,
+		`  状態: ${formatStatus(question.status)}`,
+		`  作成: ${formatDate(question.createdAt)}`,
+	].join("\n");
 
-	if (question.startedAt) {
-		output += `  開始: ${new Date(question.startedAt).toLocaleString(
-			"ja-JP"
-		)}\n`;
-	}
-
-	if (question.completedAt && question.startedAt) {
-		const duration = formatDuration(question.startedAt, question.completedAt);
-		output += `  完了: ${new Date(question.completedAt).toLocaleString(
-			"ja-JP"
-		)} (${duration})\n`;
-	}
-
-	if (question.filepath) {
-		output += `  ファイル: ${question.filepath}\n`;
-	}
-
-	if (question.error) {
-		output += `  エラー: ${question.error}\n`;
-	}
-
-	return output;
+	return [
+		baseInfo,
+		formatStartedInfo(question.startedAt),
+		formatCompletedInfo(question.completedAt, question.startedAt),
+		formatFilepath(question.filepath),
+		formatError(question.error),
+	]
+		.filter(Boolean)
+		.join(
+			question.startedAt || question.filepath || question.error ? "" : "\n"
+		);
 };

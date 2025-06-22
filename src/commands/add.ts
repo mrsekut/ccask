@@ -9,8 +9,6 @@ export const addCommand = Command.make(
 	{ question: questionArg },
 	({ question }) =>
 		Effect.gen(function* () {
-			yield* Effect.promise(
-				async () => await startBackgroundGeneration(question)
-			);
+			yield* Effect.promise(() => startBackgroundGeneration(question));
 		})
 );

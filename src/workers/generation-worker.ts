@@ -72,18 +72,21 @@ const generateExplanation = async (
 		}
 	);
 
-	let output = "";
-	let error = "";
+	const chunks: string[] = [];
+	const errorChunks: string[] = [];
 
 	child.stdout?.on("data", (data) => {
-		output += data.toString();
+		chunks.push(data.toString());
 	});
 
 	child.stderr?.on("data", (data) => {
-		error += data.toString();
+		errorChunks.push(data.toString());
 	});
 
 	child.on("close", async (code) => {
+		const output = chunks.join("");
+		const error = errorChunks.join("");
+
 		if (code === 0 && output.trim()) {
 			try {
 				await writeFile(filepath, output);

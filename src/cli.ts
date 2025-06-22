@@ -1,5 +1,3 @@
-#!/usr/bin/env bun
-
 import { Command } from "@effect/cli";
 import { BunContext, BunRuntime } from "@effect/platform-bun";
 import { Console, Effect } from "effect";
