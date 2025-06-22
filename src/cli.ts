@@ -1,10 +1,12 @@
+#!/usr/bin/env bun
+
 import { Command } from "@effect/cli";
 import { BunContext, BunRuntime } from "@effect/platform-bun";
 import { Console, Effect } from "effect";
-import { addCommand } from "./commands/index.js";
+import { addCommand, listCommand } from "./commands/index.js";
 
-const main = Command.make("ask", {}, () => Console.log(`Running 'ask'`)).pipe(
-	Command.withSubcommands([addCommand])
+const main = Command.make("ask", {}, () => Console.log(`Ask CLI - 技術用語の解説を生成します`)).pipe(
+	Command.withSubcommands([addCommand, listCommand])
 );
 
 const cli = Command.run(main, {
