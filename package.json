@@ -3,6 +3,17 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "bun run index.ts",
+    "build": "bun build index.ts --outdir dist",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@effect/cli": "^0.44.0",
+    "@effect/platform": "^0.68.0",
+    "@effect/platform-node": "^0.61.0",
+    "effect": "^3.8.0"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
