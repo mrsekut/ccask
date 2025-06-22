@@ -9,7 +9,7 @@ const WORKER_PATH = "./src/workers/generation-worker.ts";
 export const startBackgroundGeneration = async (
 	questionTerm: string
 ): Promise<void> => {
-	const question = await addQuestion(questionTerm);
+	await addQuestion(questionTerm);
 
 	const filename = sanitizeFilename(questionTerm) + ".md";
 	const filepath = join(ANSWERS_DIR, filename);
