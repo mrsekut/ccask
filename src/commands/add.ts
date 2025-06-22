@@ -4,8 +4,8 @@ import { startBackgroundGeneration } from "../core/background-processor.js";
 
 const questionArg = Args.text({ name: "question" });
 
-export const askCommand = Command.make(
-	"ask",
+export const addCommand = Command.make(
+	"add",
 	{ question: questionArg },
 	({ question }) =>
 		Effect.gen(function* () {
