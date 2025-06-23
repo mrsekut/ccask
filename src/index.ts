@@ -8,12 +8,12 @@ import {
 	copyCommand,
 } from "./commands/index.js";
 
-const main = Command.make("aiq", {}, () => Console.log(`aiq`)).pipe(
+const main = Command.make("ccask", {}, () => Console.log(`ccask`)).pipe(
 	Command.withSubcommands([askCommand, listCommand, showCommand, copyCommand])
 );
 
 const cli = Command.run(main, {
-	name: "aiq",
+	name: "ccask",
 	version: "1.0.0",
 });
 

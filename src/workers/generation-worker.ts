@@ -17,7 +17,7 @@ type ProcessedWorkerArgs = WorkerArgs & {
 const logMessage = async (message: string): Promise<void> => {
 	const logEntry = `[${new Date().toISOString()}] ${message}\n`;
 	try {
-		await writeFile("aiq.log", logEntry, { flag: "a" });
+		await writeFile("ccask.log", logEntry, { flag: "a" });
 	} catch (error) {
 		console.error(`Failed to write log: ${error}`);
 	}

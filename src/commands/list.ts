@@ -87,7 +87,7 @@ export const listCommand = Command.make(
 			const filters = buildFilters(pending, recent, status);
 
 			yield* Console.log(
-				`\n📋 aiq - Question List (${new Date().toLocaleString()})\n`
+				`\n📋 ccask - Question List (${new Date().toLocaleString()})\n`
 			);
 			yield* Console.log("📈 Statistics:");
 			yield* Console.log(
