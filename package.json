@@ -1,5 +1,5 @@
 {
-	"name": "aiq",
+	"name": "ccask",
 	"version": "1.0.0",
 	"description": "AI Question",
 	"main": "dist/index.js",
@@ -8,8 +8,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bun run index.ts",
-		"build": "bun build index.ts --outdir dist",
-		"test": "bun test"
+		"build": "bun build index.ts --outdir dist --target=node && sed -i '' '1s|#!/usr/bin/env bun|#!/usr/bin/env node|' dist/index.js",
+		"prepublishOnly": "bun run build",
+		"test": "bun test",
+		"typecheck": "tsgo --noEmit"
 	},
 	"dependencies": {
 		"@effect/cli": "^0.44.0",
@@ -21,6 +23,6 @@
 		"@types/bun": "latest"
 	},
 	"peerDependencies": {
-		"typescript": "^5"
+		"@typescript/native-preview": "^7.0.0-dev.20250619.1"
 	}
 }
