@@ -17,6 +17,4 @@ const cli = Command.run(main, {
 	version: "1.0.0",
 });
 
-const mainCli = (argv: string[]) => {
-	cli(argv).pipe(Effect.provide(BunContext.layer), BunRuntime.runMain);
-};
+cli(process.argv).pipe(Effect.provide(BunContext.layer), BunRuntime.runMain);
