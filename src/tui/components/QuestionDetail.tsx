@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Text, useInput } from 'ink';
-import { readFile } from 'fs/promises';
-import { existsSync } from 'fs';
-import { spawn } from 'child_process';
-import type { Question } from '../../types/index.js';
-import type { Screen } from '../App.js';
+import React, { useState, useEffect } from "react";
+import { Box, Text, useInput } from "ink";
+import { readFile } from "fs/promises";
+import { existsSync } from "fs";
+import { spawn } from "child_process";
+import type { Question } from "../../types/index.js";
+import type { Screen } from "../App.js";
 
-interface QuestionDetailProps {
+type QuestionDetailProps = {
 	question: Question;
 	onNavigate: (screen: Screen) => void;
-}
+};
 
 const copyToClipboard = (text: string): Promise<void> => {
 	return new Promise((resolve, reject) => {
@@ -37,7 +37,7 @@ export function QuestionDetail({ question, onNavigate }: QuestionDetailProps) {
 
 	useEffect(() => {
 		const loadContent = async () => {
-			if (question.status !== 'completed' || !question.filepath) {
+			if (question.status !== "completed" || !question.filepath) {
 				setContent(null);
 				return;
 			}
@@ -48,11 +48,15 @@ export function QuestionDetail({ question, onNavigate }: QuestionDetailProps) {
 					return;
 				}
 
-				const fileContent = await readFile(question.filepath, 'utf-8');
+				const fileContent = await readFile(question.filepath, "utf-8");
 				setContent(fileContent);
 				setError(null);
 			} catch (err) {
-				setError(`Failed to read file: ${err instanceof Error ? err.message : 'Unknown error'}`);
+				setError(
+					`Failed to read file: ${
+						err instanceof Error ? err.message : "Unknown error"
+					}`
+				);
 			}
 		};
 
@@ -60,78 +64,102 @@ export function QuestionDetail({ question, onNavigate }: QuestionDetailProps) {
 	}, [question]);
 
 	useInput(async (input) => {
-		if (input === 'c' && content) {
+		if (input === "c" && content) {
 			try {
 				await copyToClipboard(content);
-				setCopyMessage('✓ Copied to clipboard!');
+				setCopyMessage("✓ Copied to clipboard!");
 				setTimeout(() => setCopyMessage(null), 2000);
 			} catch (err) {
-				setCopyMessage(`✗ Copy failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
+				setCopyMessage(
+					`✗ Copy failed: ${
+						err instanceof Error ? err.message : "Unknown error"
+					}`
+				);
 				setTimeout(() => setCopyMessage(null), 3000);
 			}
-		} else if (input === 'l') {
-			onNavigate('list');
+		} else if (input === "l") {
+			onNavigate("list");
 		}
 	});
 
 	return (
 		<Box flexDirection="column" paddingX={2}>
 			<Box marginBottom={1}>
-				<Text bold>
-					Question Details:
-				</Text>
+				<Text bold>Question Details:</Text>
 			</Box>
-			
+
 			<Box flexDirection="column" marginBottom={1}>
-				<Text><Text bold>Term:</Text> {question.term}</Text>
-				<Text><Text bold>Status:</Text> {question.status}</Text>
-				<Text><Text bold>Created:</Text> {new Date(question.createdAt).toLocaleString()}</Text>
+				<Text>
+					<Text bold>Term:</Text> {question.term}
+				</Text>
+				<Text>
+					<Text bold>Status:</Text> {question.status}
+				</Text>
+				<Text>
+					<Text bold>Created:</Text>{" "}
+					{new Date(question.createdAt).toLocaleString()}
+				</Text>
 				{question.startedAt && (
-					<Text><Text bold>Started:</Text> {new Date(question.startedAt).toLocaleString()}</Text>
+					<Text>
+						<Text bold>Started:</Text>{" "}
+						{new Date(question.startedAt).toLocaleString()}
+					</Text>
 				)}
 				{question.completedAt && (
-					<Text><Text bold>Completed:</Text> {new Date(question.completedAt).toLocaleString()}</Text>
+					<Text>
+						<Text bold>Completed:</Text>{" "}
+						{new Date(question.completedAt).toLocaleString()}
+					</Text>
 				)}
 				{question.filepath && (
-					<Text><Text bold>File:</Text> {question.filepath}</Text>
+					<Text>
+						<Text bold>File:</Text> {question.filepath}
+					</Text>
 				)}
 				{question.error && (
-					<Text color="red"><Text bold>Error:</Text> {question.error}</Text>
+					<Text color="red">
+						<Text bold>Error:</Text> {question.error}
+					</Text>
 				)}
 			</Box>
 
 			{copyMessage && (
 				<Box marginBottom={1}>
-					<Text color={copyMessage.startsWith('✓') ? 'green' : 'red'}>
+					<Text color={copyMessage.startsWith("✓") ? "green" : "red"}>
 						{copyMessage}
 					</Text>
 				</Box>
 			)}
-			
+
 			{error && (
 				<Box marginBottom={1}>
 					<Text color="red">Error: {error}</Text>
 				</Box>
 			)}
-			
-			{question.status !== 'completed' && !question.filepath && (
+
+			{question.status !== "completed" && !question.filepath && (
 				<Box marginBottom={1}>
 					<Text color="yellow">Explanation not generated yet</Text>
 				</Box>
 			)}
-			
+
 			{content && (
-				<Box flexDirection="column" borderStyle="single" paddingX={1} paddingY={1}>
+				<Box
+					flexDirection="column"
+					borderStyle="single"
+					paddingX={1}
+					paddingY={1}
+				>
 					<Box marginBottom={1}>
 						<Text bold>Content:</Text>
 					</Box>
 					<Text>{content}</Text>
 				</Box>
 			)}
-			
+
 			<Box marginTop={1}>
 				<Text dimColor>
-					{content ? 'c: Copy to clipboard | ' : ''}l: Back to list | ESC: Menu
+					{content ? "c: Copy to clipboard | " : ""}l: Back to list | ESC: Menu
 				</Text>
 			</Box>
 		</Box>
