@@ -1,14 +1,16 @@
 {
 	"name": "ccask",
 	"version": "0.1.0",
-	"description": "AI Question",
-	"main": "dist/index.js",
-	"bin": "dist/index.js",
+	"description": "Ask claude to explain the words",
+	"main": "src/index.tsx",
+	"bin": {
+		"ccask": "dist/index.js"
+	},
 	"module": "src/index.tsx",
 	"type": "module",
 	"scripts": {
+		"build": "bun run build.ts",
 		"dev": "bun run src/index.tsx",
-		"build": "bun build src/index.tsx --outdir dist --target=node && sed -i '' '1s|#!/usr/bin/env bun|#!/usr/bin/env node|' dist/index.js",
 		"prepublishOnly": "bun run build",
 		"test": "bun test",
 		"typecheck": "tsgo --noEmit"

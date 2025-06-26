@@ -108,7 +108,6 @@
 
 - ink を使用する場合は React と @types/react も必要
 - peerDependencies で React のバージョンを明示
-- デバッグ時は react-devtools-core を optionalDependencies に
 
 ### ディレクトリ構成とパス管理
 
@@ -304,7 +303,7 @@ refactor: TUIコンポーネントの構造化
 ### アーキテクチャ決定
 
 - TUI (ink) を採用し、インタラクティブな操作を実現
-- CLIコマンドベースからTUIベースへ完全移行
+- CLI コマンドベースから TUI ベースへ完全移行
 - バックグラウンド処理の技術的価値は維持
 
 ### 開発原則
