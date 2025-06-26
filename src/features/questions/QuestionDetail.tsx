@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Text, useInput } from "ink";
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import { spawn } from "child_process";
-import type { Question } from "../../types/index.js";
-import type { Screen } from "../App.js";
+import type { Question } from "./types.js";
+import type { Screen } from "../navigation/types.js";
 
-type QuestionDetailProps = {
+type Props = {
 	question: Question;
 	onNavigate: (screen: Screen) => void;
 };
@@ -30,7 +30,7 @@ const copyToClipboard = (text: string): Promise<void> => {
 	});
 };
 
-export function QuestionDetail({ question, onNavigate }: QuestionDetailProps) {
+export function QuestionDetail({ question, onNavigate }: Props) {
 	const [content, setContent] = useState<string | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [copyMessage, setCopyMessage] = useState<string | null>(null);

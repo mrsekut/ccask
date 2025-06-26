@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Box, Text, useInput, useApp } from "ink";
-import { MainMenu } from "./components/MainMenu.js";
-import { QuestionList } from "./components/QuestionList.js";
-import { QuestionDetail } from "./components/QuestionDetail.js";
-import { AskQuestion } from "./components/AskQuestion.js";
-import { Header } from "./components/Header.js";
-import type { Question } from "../types/index.js";
-
-export type Screen = "menu" | "list" | "detail" | "ask";
-
-export type AppState = {
-	screen: Screen;
-	selectedQuestion?: Question;
-	questions: Question[];
-	filters: {
-		status: string;
-		recent: boolean;
-	};
-};
+import { useState } from "react";
+import { Box, useInput, useApp } from "ink";
+import {
+	MainMenu,
+	Header,
+	type Screen,
+	type AppState,
+} from "./features/navigation/index.js";
+import {
+	QuestionList,
+	QuestionDetail,
+	AskQuestion,
+	type Question,
+} from "./features/questions/index.js";
 
 export function App() {
 	const { exit } = useApp();

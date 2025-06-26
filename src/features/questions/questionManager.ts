@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { existsSync } from "fs";
 import { homedir } from "os";
-import type { Question, QuestionsDB, QuestionStatus } from "../types/index.js";
+import type { Question, QuestionsDB, QuestionStatus } from "./types.js";
 
 const DATA_DIR = join(homedir(), ".ccask");
 const QUESTIONS_FILE = join(DATA_DIR, "questions.json");

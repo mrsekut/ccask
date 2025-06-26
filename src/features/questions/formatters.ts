@@ -1,6 +1,6 @@
-import type { Question } from "../types/index.js";
+import type { Question } from "./types.js";
 
-export const formatDuration = (start: string, end: string): string => {
+const formatDuration = (start: string, end: string): string => {
 	const durationMs = new Date(end).getTime() - new Date(start).getTime();
 	const seconds = Math.floor(durationMs / 1000);
 	const minutes = Math.floor(seconds / 60);

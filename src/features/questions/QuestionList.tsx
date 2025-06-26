@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Text, useInput } from "ink";
-import { getAllQuestions } from "../../core/question-manager.js";
-import { formatStatus } from "../../utils/formatter.js";
-import type { Question, QuestionStatus } from "../../types/index.js";
-import type { Screen, AppState } from "../App.js";
+import { getAllQuestions } from "./questionManager.js";
+import { formatStatus } from "./formatters.js";
+import type { Question } from "./types.js";
+import type { Screen, AppState } from "../navigation/types.js";
 
-type QuestionListProps = {
+type Props = {
 	questions: Question[];
 	filters: AppState["filters"];
 	onNavigate: (screen: Screen, question?: Question) => void;
@@ -19,7 +19,7 @@ export function QuestionList({
 	onNavigate,
 	onUpdateQuestions,
 	onUpdateFilters,
-}: QuestionListProps) {
+}: Props) {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [showFilters, setShowFilters] = useState(false);
 	const [filterIndex, setFilterIndex] = useState(0);
@@ -67,12 +67,12 @@ export function QuestionList({
 				setFilterIndex((prev) => (prev > 0 ? prev - 1 : statusOptions.length));
 				return;
 			}
-			
+
 			if (key.downArrow) {
 				setFilterIndex((prev) => (prev < statusOptions.length ? prev + 1 : 0));
 				return;
 			}
-			
+
 			if (key.return) {
 				if (filterIndex === statusOptions.length) {
 					// Toggle recent filter
@@ -87,12 +87,12 @@ export function QuestionList({
 				setShowFilters(false);
 				return;
 			}
-			
+
 			if (input === "f" || key.escape) {
 				setShowFilters(false);
 				return;
 			}
-			
+
 			return;
 		}
 
@@ -111,7 +111,11 @@ export function QuestionList({
 			return;
 		}
 
-		if (key.return && filteredQuestions.length > 0 && filteredQuestions[selectedIndex]) {
+		if (
+			key.return &&
+			filteredQuestions.length > 0 &&
+			filteredQuestions[selectedIndex]
+		) {
 			onNavigate("detail", filteredQuestions[selectedIndex]);
 			return;
 		}

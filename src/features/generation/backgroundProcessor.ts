@@ -1,11 +1,11 @@
 import { spawn } from "child_process";
 import { join } from "path";
 import { homedir } from "os";
-import type { WorkerArgs } from "../types/index.js";
-import { addQuestion, sanitizeFilename } from "./question-manager.js";
+import type { WorkerArgs } from "./types.js";
+import { addQuestion, sanitizeFilename } from "../questions/index.js";
 
 const ANSWERS_DIR = join(homedir(), ".ccask", "answers");
-const WORKER_PATH = "./src/workers/generation-worker.ts";
+const WORKER_PATH = "./src/features/generation/generationWorker.ts";
 
 export const startBackgroundGeneration = async (
 	questionTerm: string

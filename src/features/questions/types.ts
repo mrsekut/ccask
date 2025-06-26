@@ -18,9 +18,3 @@ export type QuestionsDB = {
 		lastUpdated: string;
 	};
 };
-
-export type WorkerArgs = {
-	question: string;
-	filepath: string;
-	claudeCommand?: string;
-};

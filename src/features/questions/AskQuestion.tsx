@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Text, useInput } from "ink";
-import { startBackgroundGeneration } from "../../core/background-processor.js";
-import type { Screen } from "../App.js";
+import { startBackgroundGeneration } from "../generation/index.js";
+import type { Screen } from "../navigation/types.js";
 
 type AskQuestionProps = {
 	onNavigate: (screen: Screen) => void;

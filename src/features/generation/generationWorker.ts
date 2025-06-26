@@ -1,14 +1,9 @@
-#!/usr/bin/env bun
-
 import { spawn } from "child_process";
 import { writeFile, mkdir } from "fs/promises";
 import { dirname } from "path";
 import { existsSync } from "fs";
-import type { WorkerArgs } from "../types/index.js";
-import {
-	updateQuestionStatus,
-	getQuestionByTerm,
-} from "../core/question-manager.js";
+import type { WorkerArgs } from "./types.js";
+import { updateQuestionStatus, getQuestionByTerm } from "../questions/index.js";
 
 type ProcessedWorkerArgs = WorkerArgs & {
 	questionId?: string;

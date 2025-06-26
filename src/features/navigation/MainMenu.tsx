@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Text, useInput } from "ink";
-import type { Screen } from "../App.js";
+import type { Screen } from "./types.js";
 
-type MainMenuProps = {
+type Props = {
 	onNavigate: (screen: Screen) => void;
 };
 
@@ -11,7 +11,7 @@ const menuItems = [
 	{ key: "list", label: "📋 List questions", screen: "list" as Screen },
 ];
 
-export function MainMenu({ onNavigate }: MainMenuProps) {
+export function MainMenu({ onNavigate }: Props) {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	useInput((input, key) => {

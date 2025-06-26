@@ -4,11 +4,11 @@
 	"description": "AI Question",
 	"main": "dist/index.js",
 	"bin": "dist/index.js",
-	"module": "src/index.ts",
+	"module": "src/index.tsx",
 	"type": "module",
 	"scripts": {
-		"dev": "bun run src/index.ts",
-		"build": "bun build src/index.ts --outdir dist --target=node && sed -i '' '1s|#!/usr/bin/env bun|#!/usr/bin/env node|' dist/index.js",
+		"dev": "bun run src/index.tsx",
+		"build": "bun build src/index.tsx --outdir dist --target=node && sed -i '' '1s|#!/usr/bin/env bun|#!/usr/bin/env node|' dist/index.js",
 		"prepublishOnly": "bun run build",
 		"test": "bun test",
 		"typecheck": "tsgo --noEmit"
