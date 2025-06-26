@@ -1,6 +1,6 @@
 {
 	"name": "ccask",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"description": "AI Question",
 	"main": "dist/index.js",
 	"bin": "dist/index.js",
@@ -26,5 +26,8 @@
 	},
 	"peerDependencies": {
 		"@typescript/native-preview": "^7.0.0-dev.20250619.1"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
