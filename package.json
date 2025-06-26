@@ -2,6 +2,10 @@
 	"name": "ccask",
 	"version": "0.1.1",
 	"description": "Ask claude to explain the words",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mrsekut/ccask"
+	},
 	"main": "src/index.tsx",
 	"bin": {
 		"ccask": "dist/index.js"
