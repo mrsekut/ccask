@@ -1,6 +1,6 @@
 {
 	"name": "ccask",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Ask claude to explain the words",
 	"main": "src/index.tsx",
 	"bin": {
