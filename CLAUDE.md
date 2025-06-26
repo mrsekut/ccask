@@ -5,7 +5,7 @@
 - **Purpose**: 技術用語の解説を管理・生成する学習支援 TUI ツール
 - **Language**: TypeScript
 - **Runtime**: Bun
-- **Framework**: Effect-TS ecosystem (@effect/cli, @effect/platform) + ink (TUI)
+- **Framework**: Effect-TS ecosystem (@effect/platform) + ink (TUI)
 - **Main Features**:
   - バックグラウンドでの質問処理（真のバックグラウンド実行）
   - 質問の状態管理とデータ永続化
@@ -120,7 +120,6 @@ src/
 ├── tui/             # TUI関連コンポーネント
 │   ├── App.tsx      # メインアプリケーション
 │   └── components/  # TUIコンポーネント
-├── commands/        # CLIコマンド（レガシー）
 ├── core/           # コアロジック
 ├── types/          # 型定義
 ├── utils/          # ユーティリティ
@@ -302,11 +301,11 @@ refactor: TUIコンポーネントの構造化
 - リアルタイム状態更新
 - 一貫したインターフェース設計
 
-### バックアップとマイグレーション
+### アーキテクチャ決定
 
-- 既存の CLI 実装は `-backup.ts` ファイルとして保存
-- エントリーポイントの変更時は package.json も同時更新
-- 段階的な移行を心がけ、一度に大きく変更しない
+- TUI (ink) を採用し、インタラクティブな操作を実現
+- CLIコマンドベースからTUIベースへ完全移行
+- バックグラウンド処理の技術的価値は維持
 
 ### 開発原則
 
