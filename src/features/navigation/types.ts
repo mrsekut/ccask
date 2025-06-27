@@ -1,11 +1,7 @@
-export type Screen = "menu" | "list" | "detail" | "ask";
+export type Screen = 'menu' | 'list' | 'detail' | 'ask';
 
 export type AppState = {
-	screen: Screen;
-	selectedQuestion?: import("../questions/types.js").Question;
-	questions: import("../questions/types.js").Question[];
-	filters: {
-		status: string;
-		recent: boolean;
-	};
+  screen: Screen;
+  selectedQuestion?: import('../questions/types.js').Question;
+  questions: import('../questions/types.js').Question[];
 };
