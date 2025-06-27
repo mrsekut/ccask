@@ -1,7 +1,9 @@
+import type { Question } from "../questions";
+
 export type Screen = "menu" | "list" | "detail" | "ask";
 
 export type AppState = {
 	screen: Screen;
-	selectedQuestion?: import("../questions/types.js").Question;
-	questions: import("../questions/types.js").Question[];
+	selectedQuestion?: Question;
+	questions: Question[];
 };
