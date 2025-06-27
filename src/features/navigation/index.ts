@@ -1,6 +1,6 @@
 // Components
-export { MainMenu } from './MainMenu.js';
-export { Header } from './Header.js';
+export { MainMenu } from "./MainMenu.js";
+export { Header } from "./Header.js";
 
 // Types
-export type { Screen, AppState } from './types.js';
+export type { Screen, AppState } from "./types.js";

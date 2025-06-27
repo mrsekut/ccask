@@ -1,5 +1,5 @@
 // Services
-export { startBackgroundGeneration } from './backgroundProcessor.js';
+export { startBackgroundGeneration } from "./backgroundProcessor.js";
 
 // Types
-export type { WorkerArgs } from './types.js';
+export type { WorkerArgs } from "./types.js";
