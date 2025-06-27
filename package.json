@@ -20,10 +20,7 @@
 		"typecheck": "tsgo --noEmit"
 	},
 	"dependencies": {
-		"@effect/platform": "^0.85.2",
-		"@effect/platform-bun": "^0.70.4",
 		"@types/react": "^19.1.8",
-		"effect": "^3.8.0",
 		"ink": "^6.0.1",
 		"react": "^19.1.0"
 	},
